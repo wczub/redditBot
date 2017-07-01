@@ -37,7 +37,7 @@ def subCheck(file, sub, numPosts):
 
             # If an abreviation was found, then post a reply, and store post in replied to file
             if (post):
-                posts_replied_to.append(submission.id)
+                posts_replied.append(submission.id)
                 submission.reply(reply)
                 print("Bot replying to : ", submission.title)
 
@@ -45,19 +45,19 @@ def subCheck(file, sub, numPosts):
 reddit = praw.Reddit('bot')
 
 # Creates file incase it doesn't exist
-if not os.path.isfile("posts_replied_to.txt"):
-    posts_replied_to = []
+if not os.path.isfile("replied.txt"):
+    posts_replied = []
 
 else:
     # Creates an array of posts replied to
-    with open("posts_replied_to.txt", "r") as f:
-        posts_replied_to = f.read()
-        posts_replied_to = posts_replied_to.split("\n")
-        posts_replied_to = list(filter(None, posts_replied_to))
+    with open("replied.txt", "r") as f:
+        posts_replied = f.read()
+        posts_replied = posts_replied_to.split("\n")
+        posts_replied = list(filter(None, posts_replied_to))
 
 subCheck("tfts.txt", "pythonforengineers", 5)
 
 # Write our updated list back to the file
 with open("posts_replied_to.txt", "w") as f:
-    for post_id in posts_replied_to:
+    for post_id in replied:
         f.write(post_id + "\n")
